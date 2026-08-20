@@ -1,11 +1,15 @@
 # -*- mode: python ; coding: utf-8 -*-
 from PyInstaller.utils.hooks import collect_submodules
 
-hiddenimports = collect_submodules('fitz')
+hiddenimports = (
+    collect_submodules("fitz")
+    + collect_submodules("app")
+    + collect_submodules("core")
+)
 
 a = Analysis(
-    ['main.py'],
-    pathex=['.'],
+    ["main.py"],
+    pathex=["."],
     binaries=[],
     datas=[],
     hiddenimports=hiddenimports,
@@ -15,12 +19,14 @@ a = Analysis(
     excludes=[],
     noarchive=False,
 )
+
 pyz = PYZ(a.pure)
+
 exe = EXE(
     pyz,
     a.scripts,
     [],
-    name='Docu2TeX',
+    name="Docu2TeX",
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -34,5 +40,5 @@ coll = COLLECT(
     a.binaries,
     a.zipfiles,
     a.datas,
-    name='Docu2TeX',
+    name="Docu2TeX",
 )
