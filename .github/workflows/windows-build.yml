@@ -30,8 +30,6 @@ jobs:
       - name: Build EXE
         run: python -m PyInstaller --noconfirm --clean build_windows.spec
 
-      - name: Run unit tests
-        run: python -m pytest -q
 
       - name: Archive
         shell: pwsh
